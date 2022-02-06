@@ -1,0 +1,213 @@
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(196, 196, 196, 0.5);
+  box-shadow: 0px 9px 27px rgba(176, 190, 197, 0.32), 0px 3px 5px rgba(176, 190, 197, 0.32);
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: opacity .3s ease-in-out, visability .3s ease-in-out;
+  z-index: 10;
+}
+
+.popup__body {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 104px 287px;
+}
+
+.popup__content {
+  position: relative;
+  padding: 24px 0px 29px 0px;
+  background-color: var(--main-color);
+  color: rgba(51, 51, 51, 1);
+  max-width: 450px;
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.15);
+}
+
+.popup__title {
+  margin-bottom: 32px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.body-cells_change {
+  position: absolute;
+  top: 30px;
+  left: 213px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text);
+}
+
+.popup__open {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.popup-close {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.popup__close {
+  position: absolute;
+  display: block;
+  background-image: url(../img/x.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  top: 21px;
+  right: 21px;
+  width:22px;
+  height:22px;
+  cursor: pointer;
+}
+
+.popup__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup__label--label {
+  position: relative;
+  transform: translateY(-22px);
+  font-size: 10px;
+  line-height: 13px;
+  height: 14px;
+}
+
+.popup__label--placeholder {
+  position: relative;
+  top: 16px;
+  font-size: 14px;
+  line-height: 19px;
+  color: var(--text);
+  height: 14px;
+}
+
+.popup__form-main {
+  padding: 0px 30px 0 30px;
+}
+
+.popup__input {
+  width: 390px;
+  height: 25px;
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: 19px;
+  border: none;
+  border-bottom: 1px solid rgba(200, 197, 209, 1);
+  margin-bottom: 25px;
+}
+
+.popup__input:not(:last-child){
+  margin-bottom: 32px;
+}
+
+.popup__span {
+  margin-right: 4px;
+  display: block;
+  width: 14px;
+  height: 14px;
+  align-self: center;
+}
+
+.popup__btn-save {
+  display: block;
+  width: 147px;
+  height: 44px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19px;
+  color: var(--main-color);
+  cursor: pointer;
+  margin: auto;
+  margin-bottom: 5px;
+  background-color: var(--firm-color);
+  border: 1px solid transparent;
+  margin-top: 25px;
+  transition: color .3s ease-in-out, background-color .3s ease-in-out;
+}
+
+.popup__btn-save:hover {
+  color: var(--main-color);
+  background-color: var(--butterfly-bush);
+  transition: color .3s ease-in-out, background-color .3s ease-in-out;
+}
+
+.popup__btn-save:active {
+  color: var(--main-color);
+  background-color: var(--firm-color);
+  transition: color .3s ease-in-out, background-color .3s ease-in-out;
+}
+
+.popup__btn-cancel {
+  display: block;
+  margin: auto;
+  border: 1px solid transparent;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--text-color);
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.popup__btn-img {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+  text-align: center;
+}
+
+.popup__underline {
+  text-decoration: underline;
+}
+
+.popup__contact {
+  display: flex;
+  padding: 8px 0px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 -30px;
+  margin-bottom: 25px;
+  border-color: var(--grey-suit);
+}
+
+.popup__btn-contact {
+  border: none;
+  cursor: pointer;
+  display: none;
+  position: relative;
+  padding-left: 16px;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  transition: color .3s ease-in-out;
+  background-color: transparent;
+  padding: 8px 0;
+  width: 450px;
+  height: 35px;
+  color: var(--text-color);
+  background-color: var(--grey--suit);
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19px;
+  cursor: pointer;
+}
+
+.popup__btn-contact.popup__btn-contact--active {
+  display: flex;
+}
+
+
+

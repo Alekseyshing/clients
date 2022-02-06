@@ -1,0 +1,367 @@
+.main__overlay {
+  overflow: hidden;
+}
+
+.main__table {
+  width: 984px;
+}
+
+.main__table-header {
+  display: block;
+  padding-left: 20px;
+}
+
+.main__title{
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.main__header {
+  display: flex;
+  flex-direction: row;
+}
+
+.main__th {
+  display: block;
+  align-self:flex-end;
+  justify-content:flex-start;
+  margin-bottom: 7px;
+  user-select: none;
+  text-align: start;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 16px;
+  transition: color 0.3s ease-in-out;
+}
+
+.main__th:hover {
+  color: var(--firm-color);
+} 
+
+.main__th--id {
+  display: block;
+  width: 25px;
+  margin-right: 47px;
+  color: var(--firm-color);
+  background-position: right center;
+}
+
+.main__th--name {
+  margin-right: 64px;
+}
+
+.main__th--name-span-1 {
+  display: inline-flex;
+  width: 158px;
+  background-position: right center;
+}
+
+.main__th--sort-up {
+  background-image: url('../img/arrow.svg');
+  background-repeat: no-repeat;
+}
+
+.main__th--sort-down {
+  background-image: url('../img/arrowdown.svg');
+  background-repeat: no-repeat;
+}
+
+
+.main__th--name-span-2 {
+  display: inline-flex;
+  color: var(--firm-color);
+  font-size: 10px;
+}
+
+.main__th--date {
+  max-width: 90px;
+  max-height: 33px;
+  margin-right: 76px;
+  background-position: right 17px bottom 4px;
+}
+
+.main__th--change {
+  max-width: 104px;
+  margin-right: 42px;
+  background-position: right 26px bottom 4px;
+}
+
+.main__th--contacts {
+  margin-right: 94px;
+}
+
+.main__block {
+  width: 984px;
+  height: 300px;
+  margin-bottom: 40px;
+  background-color: var(--main-color);
+}
+
+.main__add-client-btn {
+  position: relative;
+  display: flex;
+  padding: 1px 26px 1px 6px;
+  flex-direction: row-reverse;
+  align-items: center;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 216px;
+  height: 44px;
+  color: var(--firm-color);
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid var(--firm-color);
+  transition: color .3s ease-in-out, background-color .3s ease-in-out;
+}
+
+.main__add-client-btn-text {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 600;
+}
+
+.main__add-client-btn svg {
+  display: block;
+  margin-right: 10px;
+  transition: fill .3s ease-in-out;
+  fill: var(--firm-color);
+}
+
+
+.main__add-client-btn:hover {
+  color: var(--main-color);
+  background-color: var(--firm-color);
+  transition: color .3s ease-in-out, background-color .3s ease-in-out;
+}
+
+.main__add-client-btn:hover svg {
+  transition: fill .3s ease-in-out;
+  fill: var(--main-color)
+}
+
+
+.main__block {
+  overflow: hidden;
+  position: relative;
+}
+
+.table__scroll {
+  display: inline-block; 
+  overflow-y: auto;
+}
+
+.search__items {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 7px 11px 7px;
+  width: 100%;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.2);
+  height: 60px;
+  font-size: 14px;
+  line-height: 19px;
+  color: var(--text-color);
+}
+
+.row__cells {
+  align-self: center;
+}
+
+.contacts__item {
+  position: relative;
+  margin-right: 7px;
+  cursor: pointer;
+}
+
+.contacts__icon_ring {
+  display: inline-block;
+  margin-bottom: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  border: 1px solid var(--light-slate-blue);
+  text-align: center;
+  font-weight: 600;
+  font-size: 8px;
+  line-height: 14px;
+  color: var(--night-rider);
+}
+
+.btn {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 2px;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.edit-btn,
+.delete-btn {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  font-size: 14px;
+  line-height: 19px;
+  height: 20px;
+  color: var(--text-color);
+}
+
+.edit-btn {
+  width: 90px;
+  margin-right: 10px;
+  transition: color .3s ease-in-out;
+}
+
+.delete-btn {
+  width: 85px;
+  transition: color .3s ease-in-out;
+}
+
+.edit-btn:hover {
+  transition: color .3s ease-in-out;
+  color: var(--firm-color);
+}
+
+.delete-btn:hover{
+  transition: color .3s ease-in-out;
+  color: var(--burant-sienna);
+}
+
+.span__edit-btn,
+.span__delete-btn {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  align-self: center;
+  background-position: contain;
+  margin-right: 3px;
+}
+
+.span__edit-btn {
+  background-image: url(../img/edit.svg);
+}
+
+.span__delete-btn {
+  background-image: url(../img/del.svg);
+}
+
+.body-cells_contacts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: -10px 2px -17px 0;
+  max-width: 120px;
+  min-width: 120px;
+  height: 40px;
+  background-color: transparent;
+}
+
+
+.body-cells_id {
+  margin-right: 28px;
+  width: 42px;
+}
+
+.body-cells_fullname {
+  width: 221px;
+  margin-right: 13px;
+  max-height: 40px;
+}
+
+.body-cells_createdate,
+.body-cells_update {
+  width: 72px;
+}
+
+.body-cells_createdate {
+  /* padding-left: 10px; */
+}
+
+.body-cells_datetime {
+  width: 36px;
+}
+
+.body-cells_update {
+  padding-left: 20px;
+}
+
+.body-cells_updatetime {
+  width: 36px;
+  padding-left: 10px;
+  margin-right: 10px;
+}
+
+.body-cells_actions {
+  display: flex;
+  align-items: center;
+  width: 189px;
+}
+
+.contacts__icon {
+  width: 16px;
+  height: 16px;
+  fill: var(--light-slate-blue);
+  opacity: 0.7;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.contacts__icon:hover {
+  opacity: 1;
+}
+
+.contacts__icon_ring {
+  display: inline-block;
+  margin-bottom: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  border: 1px solid var(--light-slate-blue);
+  text-align: center;
+  font-weight: 600;
+  font-size: 8px;
+  line-height: 14px;
+  color: var(--night-rider);
+}
+
+
+.contacts__item {
+  position: relative;
+  margin-right: 7px;
+  cursor: pointer;
+}
+
+.contacts__icon_ring {
+  display: inline-block;
+  margin-bottom: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  border: 1px solid blue;
+  text-align: center;
+  font-weight: 600;
+  font-size: 8px;
+  line-height: 14px;
+  color: black;
+}
+
+.body-cells_id,
+.body-cells_datetime, 
+.body-cells_updatetime {
+  font-size: 14px;
+  line-height: 19px;
+  color: var(--text);
+}
+
+@media(max-width: 1024px) {
+  .main__overlay {
+  overflow-x: auto;
+  }
+}

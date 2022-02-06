@@ -1,0 +1,126 @@
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background-color: var(--grey);  
+  font-family: 'Open Sans', Arial, sans-serif;  
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-color);
+  line-height: 1;
+}
+
+.fix {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+  
+button, input {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, p, ul, ol {
+  padding: 0;
+  margin: 0;
+}
+
+:focus {
+  outline: none;
+}
+
+/* container */
+
+.container {
+  max-width: 1024px;   
+  /* background-color: var(--main-color); */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;  
+}
+
+:root {
+  --main-color: #fff;
+  --firm-color: #9873ff;
+  --text-color: #333333;
+  --text: #b0b0b0;
+  --grey: #e5e5e5;
+  --grey-suit: #c8c5d1;
+  --mischka: #e7e5eb;
+  --athenths-grey: #f4f3f6;
+  --silver-chalice: #acacac;
+  --burant-sienna: #e97451;
+  --butterfly-bush: #624E9A;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important; 
+  width: 1px !important; 
+  clip: rect(0, 0, 0, 0);  
+  overflow: hidden;
+}
+
+/* при работе с float */
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.site-tooltip {
+  position: absolute;
+  top: -41px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visability 0.3s ease-in-out;
+  padding: 7px 15px;
+  background-color: var(--text-color);
+}
+
+.site-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translateX(-50%);
+  clip-path: polygon(100% 0, 0 0, 51% 100%);
+  background-color: var(--text-color);
+}

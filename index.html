@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRM база клиентов</title>
+  <link rel="preload" href="fonts/open-sans-v20-latin_cyrillic-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/open-sans-v20-latin_cyrillic-regular.woff" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/open-sans-v20-latin_cyrillic-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/open-sans-v20-latin_cyrillic-700.woff" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/open-sans-v20-latin_cyrillic-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/open-sans-v20-latin_cyrillic-600.woff" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/tooltip.css">
+  <link rel="stylesheet" href="css/preloader.css">
+  <link rel="stylesheet" href="css/delete-modal.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header__container">
+      <img class="header__logo" src="img/logo.png" alt="Логотип компании">
+      <input class="header__input" type="search" placeholder="Введите запрос">
+    </div>
+  </header>
+  <main class="main">
+    <div class="container">
+      <h1 class="main__title">Клиенты</h1>
+      <div class="main__overlay">
+        <table class="main__table">
+          <thead class="main__table-header">
+            <tr class="main__header">
+              <th class="main__th main__th--id main__th--sort-up">
+                ID 
+              </th>
+              <th class="main__th main__th--name">
+                <span class="main__th--name-span-1 main__th--sort-down">Фамилия Имя Отчество</span>
+                <span class="main__th--name-span-2">А-Я</span>
+              </th>
+              <th class="main__th main__th--date main__th--sort-down">
+                Дата и время создания
+              </th>
+              <th class="main__th main__th--change main__th--sort-down">
+                Последние изменения
+              </th>
+              <th class="main__th main__th--contacts">Контакты</th>
+              <th class="main__th main__th--actions">Действия</th>
+
+            </tr>
+          </thead>
+          <tbody class="main__block table__scroll"></tbody>
+        </table>
+      </div>
+      <button class="main__add-client-btn" type="button">
+        <span class="main__add-client-btn-text">Добавить клиента</span>
+        <svg width="23" height="16" viewBox="0 0 23 16"  xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M14.5 8C16.71 8 18.5 6.21 18.5 4C18.5 1.79 16.71 0 14.5 0C12.29 0 10.5 1.79 10.5 4C10.5 6.21 12.29 8 14.5 8ZM5.5 6V3H3.5V6H0.5V8H3.5V11H5.5V8H8.5V6H5.5ZM14.5 10C11.83 10 6.5 11.34 6.5 14V16H22.5V14C22.5 11.34 17.17 10 14.5 10Z"
+             />
+        </svg>
+      </button>
+    </div>
+  </main>
+</body>
+
+</html>

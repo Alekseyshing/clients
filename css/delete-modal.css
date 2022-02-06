@@ -1,0 +1,103 @@
+.delete-window {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(196, 196, 196, 0.5);
+  box-shadow: 0px 9px 27px rgba(176, 190, 197, 0.32), 0px 3px 5px rgba(176, 190, 197, 0.32);
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: opacity .3s ease-in-out, visability .3s ease-in-out;
+  z-index: 10;
+}
+
+
+.delete-window__body {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 100px;
+}
+
+
+.delete-window__block {
+  position: absolute;
+  display: inline-block;
+  padding: 22px 22px 27px;
+  background-color: var(--main-color);
+  color: rgba(51, 51, 51, 1);
+  width: 450px;
+  height: 215px;
+  z-index: 10;
+}
+
+.delete-window__open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.delete-window__close {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.delete-window__heder {
+  text-align: center;
+  margin-bottom: 11px;
+  color: var(--text-color);
+}
+
+.delete-window__text {
+  display: block;
+  margin: auto;
+  margin-bottom: 25px;
+  text-align: center;
+  max-width: 275px;
+  font-size: 14px;
+  line-height: 19px;
+  color: var(--text-color);
+}
+
+.delete-window__del-btn {
+  display: block;
+  margin: auto;
+  margin-bottom: 5px;
+  width: 130px;
+  height: 44px;
+  color: var(--main-color);
+  background-color: var(--firm-color);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.delete-window__cancel-btn {
+  display: block;
+  margin: auto;
+  border: none;
+  background-color: transparent;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-color);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.delete-window__close-btn {
+  position: absolute;
+  display: block;
+  background-image: url(../img/x.svg);
+  background-position: center;
+  top: 23px;
+  right: 21px;
+  width:22px;
+  height:22px;
+  cursor: pointer;
+}
+
+
+

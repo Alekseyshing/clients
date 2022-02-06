@@ -1,0 +1,26 @@
+.contacts__tooltip {
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  width: auto;
+}
+
+.contacts__tooltip-type {
+  margin-right: 2px;
+  display: block;
+  color: var(--main-color);
+}
+
+.contacts__tooltip-value {
+  display: block;
+  text-decoration: underline;
+  font-weight: 700;
+  color: var(--firm-color);
+}
+
+.contacts__link:hover .contacts__tooltip {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out, transform .5s ease-in-out;
+}

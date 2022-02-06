@@ -1,0 +1,176 @@
+.modal__contact {
+  background-color: var(--grey);
+}
+
+
+.contact {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-left: 30px;
+  width: 390px;
+}
+
+.contact__name {
+  position: relative;
+  height: 37px;
+  z-index: 12;
+  max-width: 123px;
+  min-width: 123px;
+  padding: 10px 12px;
+  padding-right: 60px;
+  transition: background-color .3s ease-in-out;
+  cursor: pointer;
+  border: 1px solid var(--silver-chalice);
+  background-color:  var(--grey-suit);
+  color: var(--text-color);
+}
+
+.contact__name::before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  width: 10px;
+  height: 10px;
+  background-image: url('../img/contact-arrow.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  transition: transform .3s ease-in-out;
+}
+
+.contact__name:hover {
+  background-color: var(--grey);
+  transition: background-color .3s ease-in-out;
+}
+
+.contact__name:active {
+  background-color:  var(--mischka);
+}
+
+.contact__type {
+  position: relative;
+}
+
+.contact__list {
+  position: absolute;
+  top: 36px;
+  left: 0px;
+  width: 100%;
+  z-index: 13;
+  font-size: 12px;
+  padding: 10px 0 6px;
+  max-width: 123px;
+  min-width: 123px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease-in-out, visability .3s ease-in-out;
+  background-color: var(--grey-suit);
+  border: 1px solid var(--silver-chalice);
+}
+
+
+
+.contact__item {
+  cursor: pointer;
+  padding-top: 4px;
+  padding-bottom: 7px;
+  padding-left: 12px;
+  transition: background-color .3s ease-in-out;
+}
+
+.contact__item:hover {
+  background-color:  var(--athenths-grey);
+}
+
+.contact__input {
+  display: block;
+  padding-left: 12px;
+  width: 100%;
+  background-color: transparent;
+  height: 37px;
+  border: 1px solid var(--grey-suit);
+  border-right: none;
+  border-left: none;
+}
+
+.contact__delete {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-self: stretch;
+  position: relative;
+  align-items: center;
+  width: 27px;
+  background-color: var(--mischka);
+  border: 1px solid var(--silver-chalice);
+  transition: border-color .3s ease-in-out;
+  color: var(--main-color);
+}
+
+.contact__delete svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  fill: var(--silver-chalice);
+  transition: fill .3s ease-in-out;
+}
+
+.contact__delete:hover {
+  border-color: var(--burant-sienna);
+  transition: border-color .3s ease-in-out;
+}
+
+.contact__delete:hover svg {
+  fill: var(--burant-sienna);
+  transition: fill .3s ease-in-out;
+
+}
+
+.contact__tooltip {
+  display: block;
+}
+
+.contact__delete:hover .contact__tooltip {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease-in-out, visability 0.3s ease-in-out;
+}
+
+.contact__delete:hover .contact__tooltip {
+  min-width: 160px;
+  top: -30px;
+}
+
+.contact__list.contact__list--active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .3s ease-in-out, visability .3s ease-in-out;
+}
+
+.contact__list--active.contact__name::before {
+  transform: rotate(-180deg);
+  transition: transform .3s ease-in-out;
+}
+
+.contacts__link {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin-bottom: 7px;
+}
+
+.contacts__link g, 
+.contacts__link path {
+  transition: opacity .3s ease-in-out;
+}
+
+.contacts__link:hover g, 
+.contacts__link:hover path {
+  opacity: 1;
+  transition: opacity .3s ease-in-out;
+}
+
+.contacts__link:not(:last-child){
+  margin-right: 7px;
+}

@@ -1,0 +1,32 @@
+.preloader {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  height: 300px;
+  width: 100%;
+  background-color: var(--color-white);
+  animation: spin 1s linear infinite;
+}
+
+#loader {
+  --background: #62ABFF;
+  --front-color: #8052ff;
+  --back-color: #C3C8DE;
+  --text-color: #414856;
+  width: 64px;
+  height: 64px;
+  border-radius: 50px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform:  rotate(360deg); }
+}
