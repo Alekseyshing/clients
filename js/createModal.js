@@ -49,6 +49,23 @@ export function createModal() {
   const saveBtn = document.createElement('button');
   const resetBtn = document.createElement('button');
 
+  const errorBlock = document.createElement('p');
+  const unacceptabbleLetter = document.createElement('span');
+  const writeName = document.createElement('span');
+  const writeSurname = document.createElement('span');
+  const writeLastname = document.createElement('span');
+  const requiredValue = document.createElement('span');
+  const requiredContacts = document.createElement('span');
+
+
+  errorBlock.classList.add('popup__error');
+  unacceptabbleLetter.id = 'unacceptabbleLetter';
+  writeName.id = 'writeName';
+  writeSurname.id = 'writeSurname';
+  writeLastname.id = 'writeLastname';
+  requiredValue.id = 'requiredValue';
+  requiredContacts.id = 'requiredContacts';
+
   popup.classList.add('popup');
   popup.id = 'popup';
   popupBody.classList.add('popup__body');
@@ -70,17 +87,20 @@ export function createModal() {
   labelMidname.innerHTML = 'Отчество';
 
   inputSurname.classList.add('popup__input');
+  inputSurname.id = 'floatingSurname';
   inputSurname.classList.add('popup__input-surname');
   inputSurname.name = 'surname';
   inputSurname.type = 'text';
 
   inputName.classList.add('popup__input');
+  inputName.id = 'floatingName';
   inputName.classList.add('popup__input-name');
   inputName.name = 'name';
   inputName.type = 'text';
 
 
   inputMidname.classList.add('popup__input');
+  inputMidname.id = 'floatingLastName';
   inputMidname.classList.add('popup__input-middlename');
   inputMidname.name = 'mid-name';
   inputMidname.type = 'text';
@@ -106,7 +126,8 @@ export function createModal() {
   popupBody.append(popupContent);
   popupContent.append(popupClose, popupForm);
   contactsBlock.append(popupAddContact);
-  popupForm.append(popupFormMain, contactsBlock, saveBtn, resetBtn);
+  errorBlock.append(unacceptabbleLetter, writeName, writeSurname, writeLastname, requiredValue, requiredContacts);
+  popupForm.append(popupFormMain, contactsBlock, errorBlock, saveBtn, resetBtn);
   popupFormMain.append(popupHeader, labelSurname, inputSurname, labelName, inputName, labelMidname,
     inputMidname);
   popupAddContactSpan.append(popupAddContactImg);

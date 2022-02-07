@@ -2,7 +2,7 @@ import { svgDelete, svgPhone, svgFb, svgVk, svgMail, svgOther } from "./svg.js";
 import { contactTooltip } from "./createTooltip.js";
 
 
-export const createContactItem = () => {
+export const createContactItem = (client) => {
   const contact = document.createElement('div');
   const contactType = document.createElement('div');
   const contactName = document.createElement('button');
@@ -90,10 +90,10 @@ export const createContactItem = () => {
 
 export const createContactLink = (type, value, link, svg, item) => {
   const setTooltip = contactTooltip(type, value);
-  
+
   link = document.createElement('a');
   link.classList.add('contacts__link');
-  link.innerHTML = svg; 
+  link.innerHTML = svg;
 
   if (type === 'Email') {
     link.href = `mailto: ${value.trim()}`

@@ -209,5 +209,18 @@
   display: flex;
 }
 
+.popup__error {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  margin-bottom: 10px;
+  max-width: 255px;
+  color: var(--burant-sienna);
+  font-size: 10px;
+  line-height: 13px;
+  text-align: center;
+  align-self: center;
+}
+
 
 

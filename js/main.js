@@ -23,6 +23,8 @@ import {
     sendClientData
 } from "./clientsApi.js";
 import { createPreloader } from "./preLoader.js";
+import { validateClientForm } from './validateForm.js'
+import { validateClientContact } from "./validateContact.js";
 
 
 const createApp = async () => {
@@ -91,7 +93,7 @@ const createApp = async () => {
     //Удаление строки таблицы и клиента с сервера по id
     const deleteListItems = () => {
         const btnsDel = document.querySelectorAll('.delete-btn');
-        const delBtns = document.querySelectorAll('.delete-window__del-btn');
+        const delBtn = document.querySelector('.delete-window__del-btn');
 
         btnsDel.forEach(button => {
             button.addEventListener('click', function (e) {
@@ -101,10 +103,10 @@ const createApp = async () => {
                 modalDelete.modalDel.classList.add('delete-window__open');
 
                 //удаление по нажатию на Enter
-                document.addEventListener('keydown', function (event) {
+                document.addEventListener('keydown', (event) => {
                     if (event.code === 'Enter') {
                         event.preventDefault();
-                        clients.forEach(function (client) {
+                        clients.forEach((client) => {
                             if (client.id === clientId) {
                                 document.getElementById(clientId).remove();
                                 deleteClient(clientId);
@@ -115,10 +117,9 @@ const createApp = async () => {
                 })
 
                 //удаление по клику
-                delBtns.forEach(function (delBtn) {
-                    delBtn.addEventListener('click', function (evt) {
+                    delBtn.addEventListener('click', (evt) => {
                         evt.preventDefault();
-                        clients.forEach(function (client) {
+                        clients.forEach((client) => {
                             if (client.id === clientId) {
                                 deleteClient(clientId);
                                 document.getElementById(clientId).remove();
@@ -126,7 +127,6 @@ const createApp = async () => {
                         })
                         closeModalDelete();
                     })
-                })
             })
 
             return {
@@ -139,7 +139,7 @@ const createApp = async () => {
 
     //Изменить клиента по id
 
-    const changeClientData = () => {
+    const changeClientData = (client) => {
 
         const changeBtns = document.querySelectorAll('.edit-btn');
         const popupIdSelector = document.createElement('span');
@@ -185,37 +185,38 @@ const createApp = async () => {
                     modal.popupAddContact.classList.remove('popup__btn-contact--active')
                 }
 
-                modal.popupForm.addEventListener('submit', (event) => {
+                modal.popupForm.addEventListener('submit', async (event) => {
                     event.preventDefault();
-
+        
                     const contactTypes = document.querySelectorAll('.contact__name');
                     const contactValues = document.querySelectorAll('.contact__input');
-
-                    console.log(contactTypes);
-
+        
                     let contacts = [];
                     let data = {};
-
+        
                     for (let i = 0; i < contactTypes.length; i++) {
                         contacts.push({
                             type: contactTypes[i].innerHTML,
                             value: contactValues[i].value
                         })
                     }
-
+        
                     data.surname = modal.inputSurname.value;
                     data.name = modal.inputName.value;
                     data.lastName = modal.inputMidname.value;
                     data.contacts = contacts;
-
+        
                     modal.modalWindowStructure.type = 'change';
-
+        
                     if (modal.modalWindowStructure.type = 'change') {
-                        sendClientData(data, 'PATCH', client.id);
-
+                        const editedClient = await sendClientData(data, 'PATCH', clientId);
+                        console.log(editedClient);
+                        document.getElementById(editedClient.id).remove();
+                        document.querySelector('.main__block').append(getNewRow(editedClient).tr);
                         closeModalWindow();
                     }
                 })
+
 
                 deleteClientBtn.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -226,7 +227,7 @@ const createApp = async () => {
                     })
 
                     //удаление по нажатию на Enter
-                    document.addEventListener('keydown', function (event) {
+                    document.addEventListener('keydown', (event) =>{
                         if (event.code === 'Enter') {
                             event.preventDefault();
                             deleteClient(clientId);
@@ -240,6 +241,9 @@ const createApp = async () => {
                 })
             })
         })
+
+
+
     }
 
     changeClientData();
@@ -270,50 +274,54 @@ const createApp = async () => {
         modal.resetBtn.innerHTML = modal.modalWindowStructure.headTitle().button;
         modal.resetBtn.classList.remove('popup__underline');
 
-        modal.popupForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            const typesOfContacts = document.querySelectorAll('.contact__name');
-            const typesOfValues = document.querySelectorAll('.contact__input');
-
-            let contacts = [];
-            let newClient = {};
-
-            for (let i = 0; i < typesOfContacts.length; i++) {
-                contacts.push({
-                    type: typesOfContacts[i].innerHTML,
-                    value: typesOfValues[i].value
-                })
-            }
-
-            newClient.surname = modal.inputSurname.value;
-            newClient.name = modal.inputName.value;
-            newClient.lastName = modal.inputMidname.value;
-            newClient.contacts = contacts;
-
-            modal.modalWindowStructure.type = 'new';
-
-            if (modal.modalWindowStructure.type = 'new') {
-                try {
-                    const newClients = await sendClientData(newClient, 'POST');
-                    console.log(newClients);
-                    console.log(getNewRow(newClients));
-                    document.querySelector('.main__block').append(getNewRow(newClients).tr);
-                    closeModalWindow();
-                    newClient = {};
-                } catch (error) {
-                    console.log(error);
-                }
-
-            }
-        })
-
         // Клик закрытия модального окна
         closeModalBtn.addEventListener('click', function (e) {
             e.preventDefault();
             closeModalWindow();
             modal.refreshInputs();
         })
+    })
+
+    modal.popupForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if(!validateClientForm()){
+            return
+        }
+
+        const typesOfContacts = document.querySelectorAll('.contact__name');
+        const typesOfValues = document.querySelectorAll('.contact__input');
+
+        let contacts = [];
+        let newClient = {};
+
+        for (let i = 0; i < typesOfContacts.length; i++) {
+            if(!validateClientContact(typesOfContacts[i], typesOfValues[i])){
+                return;
+            }
+            contacts.push({
+                type: typesOfContacts[i].innerHTML,
+                value: typesOfValues[i].value
+            })
+        }
+
+        newClient.surname = modal.inputSurname.value;
+        newClient.name = modal.inputName.value;
+        newClient.lastName = modal.inputMidname.value;
+        newClient.contacts = contacts;
+
+        modal.modalWindowStructure.type = 'new';
+
+        if (modal.modalWindowStructure.type === 'new') {
+            try {
+                const newClients = await sendClientData(newClient, 'POST');
+                document.querySelector('.main__block').append(getNewRow(newClients).tr);
+                closeModalWindow();
+            } catch (error) {
+                console.log(error);
+            }
+
+        }
     })
 
     const cancellBtn = document.querySelector('.popup__btn-cancel');
