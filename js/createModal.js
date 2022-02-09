@@ -1,6 +1,5 @@
-import {
-  closeModalWindow
-} from "./closeModalWindow.js";
+import { createContactItem } from "./createContact.js";
+import { svgSaveSpinner } from "./svg.js";
 
 
 
@@ -56,8 +55,9 @@ export function createModal() {
   const writeLastname = document.createElement('span');
   const requiredValue = document.createElement('span');
   const requiredContacts = document.createElement('span');
+  const savePopupSpinner = document.createElement('span');
 
-
+  savePopupSpinner.classList.add('popup__spinner');
   errorBlock.classList.add('popup__error');
   unacceptabbleLetter.id = 'unacceptabbleLetter';
   writeName.id = 'writeName';
@@ -85,23 +85,21 @@ export function createModal() {
   labelMidname.classList.add('popup__label', 'popup__label--placeholder');
   labelMidname.setAttribute('for', 'mid-name');
   labelMidname.innerHTML = 'Отчество';
+  savePopupSpinner.innerHTML =  svgSaveSpinner;
 
-  inputSurname.classList.add('popup__input');
+  inputSurname.classList.add('popup__input', 'popup__input-surname');
   inputSurname.id = 'floatingSurname';
-  inputSurname.classList.add('popup__input-surname');
   inputSurname.name = 'surname';
   inputSurname.type = 'text';
 
-  inputName.classList.add('popup__input');
+  inputName.classList.add('popup__input', 'popup__input-name');
   inputName.id = 'floatingName';
-  inputName.classList.add('popup__input-name');
   inputName.name = 'name';
   inputName.type = 'text';
 
 
-  inputMidname.classList.add('popup__input');
+  inputMidname.classList.add('popup__input', 'popup__input-middlename');
   inputMidname.id = 'floatingLastName';
-  inputMidname.classList.add('popup__input-middlename');
   inputMidname.name = 'mid-name';
   inputMidname.type = 'text';
 
@@ -123,16 +121,18 @@ export function createModal() {
   resetBtn.innerHTML = modalWindowStructure.headTitle().button;
 
   popup.append(popupBody);
+  saveBtn.prepend(savePopupSpinner);
   popupBody.append(popupContent);
   popupContent.append(popupClose, popupForm);
   contactsBlock.append(popupAddContact);
   errorBlock.append(unacceptabbleLetter, writeName, writeSurname, writeLastname, requiredValue, requiredContacts);
-  popupForm.append(popupFormMain, contactsBlock, errorBlock, saveBtn, resetBtn);
-  popupFormMain.append(popupHeader, labelSurname, inputSurname, labelName, inputName, labelMidname,
+  popupForm.append(popupHeader, popupFormMain, contactsBlock, errorBlock, saveBtn, resetBtn);
+  popupFormMain.append(labelSurname, inputSurname, labelName, inputName, labelMidname,
     inputMidname);
   popupAddContactSpan.append(popupAddContactImg);
   popupAddContact.append(popupAddContactSpan);
 
+  
   const refreshLabels = () => {
     labelSurname.classList.remove('popup__label--placeholder');
     labelSurname.classList.add('popup__label--label');
@@ -157,12 +157,57 @@ export function createModal() {
     inputMidname.value = '';
   }
 
+  const inputsListener = () => {
+            
+    const inputs = document.querySelectorAll('.popup__input');
+    const labels = document.querySelectorAll('.popup__label');
+    inputs.forEach((input) => {
+        input.onfocus = () => {
+            labels.forEach((label) => {
+                if (label.getAttribute('for') === input.getAttribute('name') || input.value != 0) {
+                    label.classList.remove('popup__label--placeholder');
+                    label.classList.add('popup__label--label');
+                }
+  
+            })
+        }
+        input.onblur = () => {
+            labels.forEach((label) => {
+                if (label.getAttribute('for') === input.getAttribute('name') && input.value < 1) {
+                    label.classList.remove('popup__label--label');
+                    label.classList.add('popup__label--placeholder');
+                }
+            })
+        }
+    })
+  }
+
+  popupAddContact.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const contactItem = createContactItem();
+    const contactsItems = document.getElementsByClassName('contact');
+
+    if (contactsItems.length < 9) {
+      contactsBlock.prepend(contactItem.contact);
+      contactsBlock.style.backgroundColor = 'var(--athenths-grey)';
+      contactsBlock.style = 'padding: 25px 0';
+    } else {
+      contactsBlock.prepend(contactItem.contact)
+      popupAddContact.classList.remove('popup__btn-contact--active')
+    }
+  })
+
+  resetBtn.addEventListener('click', () => {
+    popup.remove();
+  })
+
 
   // Клик на оверлей
   document.addEventListener('click', function (event) {
     if (event.target.classList.contains('popup__close') ||
       event.target.classList.contains('popup__body')) {
-      closeModalWindow();
+      popup.remove();
     }
   });
 
@@ -181,9 +226,11 @@ export function createModal() {
     popupAddContact,
     resetBtn,
     modalWindowStructure,
+    popupClose,
     refreshLabels,
     refreshInputs,
-    refreshPlaceholders
+    refreshPlaceholders,
+    inputsListener
   }
 }
 

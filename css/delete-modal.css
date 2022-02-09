@@ -6,8 +6,8 @@
   box-shadow: 0px 9px 27px rgba(176, 190, 197, 0.32), 0px 3px 5px rgba(176, 190, 197, 0.32);
   top: 0;
   left: 0;
-  opacity: 0;
-  visibility: hidden;
+  /* opacity: 0;
+  visibility: hidden; */
   overflow-y: auto;
   overflow-x: hidden;
   transition: opacity .3s ease-in-out, visability .3s ease-in-out;
@@ -65,6 +65,7 @@
 
 .delete-window__del-btn {
   display: block;
+  position: relative;
   margin: auto;
   margin-bottom: 5px;
   width: 130px;

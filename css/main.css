@@ -201,6 +201,7 @@
 
 .edit-btn,
 .delete-btn {
+  position: relative;
   display: flex;
   justify-content: space-between;
   text-align: center;
@@ -211,14 +212,24 @@
   color: var(--text-color);
 }
 
+.edit-btn,
+.delete-btn {
+  background-repeat: no-repeat;
+  background-position: left center;
+
+}
+
 .edit-btn {
-  width: 90px;
+  width: 85px;
+  padding-left: 16px;
   margin-right: 10px;
+  background-image: url(../img/edit.svg);
   transition: color .3s ease-in-out;
 }
 
 .delete-btn {
-  width: 85px;
+  width: 72px;
+  background-image: url(../img/del.svg);
   transition: color .3s ease-in-out;
 }
 
@@ -230,27 +241,6 @@
 .delete-btn:hover{
   transition: color .3s ease-in-out;
   color: var(--burant-sienna);
-}
-
-.span__edit-btn,
-.span__delete-btn {
-  display: block;
-  width: 20px;
-  height: 20px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  align-self: center;
-  background-position: contain;
-  margin-right: 3px;
-}
-
-.span__edit-btn {
-  background-image: url(../img/edit.svg);
-}
-
-.span__delete-btn {
-  background-image: url(../img/del.svg);
 }
 
 .body-cells_contacts {
@@ -358,6 +348,30 @@
   font-size: 14px;
   line-height: 19px;
   color: var(--text);
+}
+
+.main__actions-wait {
+  background-image: none;
+}
+
+.main__actions-spinner {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: spinner .3s ease-in-out;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media(max-width: 1024px) {

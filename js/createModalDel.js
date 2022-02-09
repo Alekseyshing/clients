@@ -1,3 +1,5 @@
+import { svgSaveSpinner } from "./svg.js";
+
 export const createModalDelete = () => {
     const modalDel = document.createElement('div');
     modalDel.classList.add('delete-window');
@@ -14,6 +16,8 @@ export const createModalDelete = () => {
     modalText.classList.add('delete-window__text');
     modalText.innerHTML = 'Вы действительно хотите удалить данного клиента?'
     const deleteClientBtn = document.createElement('button');
+    const deleteSpinner = document.createElement('span');
+    deleteSpinner.classList.add('popup__spinner');
     deleteClientBtn.type = 'click';
     deleteClientBtn.classList.add('delete-window__del-btn');
     deleteClientBtn.innerHTML = 'Удалить';
@@ -22,12 +26,14 @@ export const createModalDelete = () => {
     cancelDeleteClient.innerHTML = 'Отмена';
     cancelDeleteClient.type = 'reset';
 
+    deleteSpinner.innerHTML = svgSaveSpinner;
+    deleteClientBtn.prepend(deleteSpinner);
     deleteBlock.append(modalDelClose, modalHeader, modalText, deleteClientBtn, cancelDeleteClient);
     deleteBody.append(deleteBlock);
     modalDel.append(deleteBody);
 
     const closeModalDel = () => {
-        modalDel.classList.remove('delete-window__open')
+        modalDel.remove();
     }
 
     //Удалить по клику на кнопку
@@ -37,7 +43,6 @@ export const createModalDelete = () => {
     })
 
     modalDelClose.addEventListener('click', function (e) {
-        e.preventDefault();
         closeModalDel();
     })
 
@@ -64,6 +69,7 @@ export const createModalDelete = () => {
         deleteBlock,
         deleteClientBtn,
         modalDelClose,
+        deleteSpinner,
         closeModalDel
     }
 }
