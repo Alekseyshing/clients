@@ -63,10 +63,10 @@ export const validateClientForm = () => {
 
   if(!checkRequiredName(userSurname, writeSurname, 'Фамилию')){ return false };
   if(!checkRequiredName(userName, writeName, 'Имя')){ return false };
-  if(!checkRequiredName(userLastName, writeLastname, 'Отчество')){ return false };
+  // if(!checkRequiredName(userLastName, writeLastname, 'Отчество')){ return false };
   if(!checkByRegexp(userSurname, regexp)){ return false };
   if(!checkByRegexp(userName, regexp)){ return false };
-  if(!checkByRegexp(userLastName, regexp)){ return false };
+  // if(!checkByRegexp(userLastName, regexp)){ return false };
 
   return true;
 }

@@ -104,6 +104,7 @@ h1, h2, h3, p, ul, ol {
 }
 .site-tooltip {
   position: absolute;
+  z-index: 20;
   top: -41px;
   left: 50%;
   transform: translateX(-50%);
@@ -117,6 +118,7 @@ h1, h2, h3, p, ul, ol {
 .site-tooltip::before {
   content: '';
   position: absolute;
+  z-index: 20;
   bottom: -9px;
   left: 50%;
   width: 10px;

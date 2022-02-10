@@ -143,11 +143,11 @@
 
 
 .main__block {
-  overflow: hidden;
   position: relative;
 }
 
 .table__scroll {
+  position: relative;
   display: inline-block; 
   overflow-y: auto;
 }

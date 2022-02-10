@@ -42,7 +42,7 @@ export const deleteClient = async (id) => {
     method: "DELETE",
   }).then((response) => {
     if (response.status === 200) {
-      getClients();
+      console.log(response);
     }
   }).catch(() => {
     throw new Error(`Ошибка по адресу: ${URI}, статус ошибки: ${response.status}`)

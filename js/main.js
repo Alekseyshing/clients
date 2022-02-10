@@ -11,16 +11,29 @@ import {
     getClients,
     sendClientData
 } from "./clientsApi.js";
-import { createPreloader } from "./preLoader.js";
-import { validateClientForm } from './validateForm.js'
-import { validateClientContact } from "./validateContact.js";
-
+import {
+    createPreloader
+} from "./preLoader.js";
+import {
+    validateClientForm
+} from './validateForm.js'
+import {
+    validateClientContact
+} from "./validateContact.js";
+import {
+    tableFilter
+} from './filterMainInput.js'
+import {
+    sortingClientItems
+} from './sortingClients.js'
 
 const createApp = async () => {
     const headers = getHeaders();
     const tableBody = document.querySelector('.main__block');
+    tableBody.id = 'table-body';
     tableBody.append(createPreloader());
-    // const clients = await getClients();
+
+
 
     //Тело таблицы
     const modal = createModal();
@@ -29,7 +42,8 @@ const createApp = async () => {
 
     const preloader = document.querySelector('.preloader');
 
-    // preloader.remove();
+    tableFilter();
+
 
     try {
         const clients = await getClients();
@@ -43,12 +57,7 @@ const createApp = async () => {
         preloader.remove();
     }
 
-
-    // for (const client of clients) {
-    //     document.querySelector('.main__block').append(getNewRow(client).tr)
-    // }
-
-
+    sortingClientItems();
 
     //Новый клиент
     const addButton = document.querySelector('.main__add-client-btn');

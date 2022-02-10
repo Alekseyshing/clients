@@ -82,7 +82,21 @@ export const getNewRow = (client) => {
     return id
   }
 
+  //удаление по нажатию на Enter
+  const deleteClientByEnter = () => {
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Enter') {
+        if (document.getElementById(client.id)) {
+          deleteClient(client.id);
+          document.getElementById(client.id).remove();
+          modalDelete.modalDel.remove();
+        }
+      }
+    })
+  };
+
   buttonDelete.addEventListener('click', (e) => {
+    deleteClientByEnter();
     e.preventDefault();
     deleteSpinner.style.display = 'block';
     buttonDelete.classList.add('main__actions-wait')
@@ -92,15 +106,6 @@ export const getNewRow = (client) => {
       deleteSpinner.style.display = 'none';
       buttonDelete.classList.remove('main__actions-wait')
     }, 300)
-  })
-
-  //удаление по нажатию на Enter
-  document.addEventListener('keydown', (event) => {
-    if (event.code === 'Enter') {
-      deleteClient(client.id);
-      document.getElementById(client.id).remove();
-      modalDelete.modalDel.remove();
-    }
   })
 
     //удаление по клику

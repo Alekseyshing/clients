@@ -21,34 +21,34 @@
   <link rel="stylesheet" href="css/tooltip.css">
   <link rel="stylesheet" href="css/preloader.css">
   <link rel="stylesheet" href="css/delete-modal.css">
-  <script type="module" src="js/main.js"></script>
+  <script defer type="module" src="js/main.js" ></script>
 </head>
 
 <body>
   <header class="header">
     <div class="container header__container">
       <img class="header__logo" src="img/logo.png" alt="Логотип компании">
-      <input class="header__input" type="search" placeholder="Введите запрос">
+      <input class="header__input" type="search" id="header__filter" placeholder="Введите запрос">
     </div>
   </header>
   <main class="main">
     <div class="container">
       <h1 class="main__title">Клиенты</h1>
       <div class="main__overlay">
-        <table class="main__table">
+        <table class="main__table table_sort">
           <thead class="main__table-header">
             <tr class="main__header">
-              <th class="main__th main__th--id main__th--sort-up">
+              <th class="main__th main__th--id main__th--sort-up" data-type="integer">
                 ID 
               </th>
-              <th class="main__th main__th--name">
+              <th class="main__th main__th--name" data-type="text">
                 <span class="main__th--name-span-1 main__th--sort-down">Фамилия Имя Отчество</span>
                 <span class="main__th--name-span-2">А-Я</span>
               </th>
-              <th class="main__th main__th--date main__th--sort-down">
+              <th class="main__th main__th--date main__th--sort-down" data-type="date">
                 Дата и время создания
               </th>
-              <th class="main__th main__th--change main__th--sort-down">
+              <th class="main__th main__th--change main__th--sort-down" data-type="date">
                 Последние изменения
               </th>
               <th class="main__th main__th--contacts">Контакты</th>
