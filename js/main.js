@@ -9,7 +9,8 @@ import {
 } from "./createModal.js";
 import {
     getClients,
-    sendClientData
+    sendClientData,
+    fetchSearchClients
 } from "./clientsApi.js";
 import {
     createPreloader
@@ -21,9 +22,6 @@ import {
     validateClientContact
 } from "./validateContact.js";
 import {
-    tableFilter
-} from './filterMainInput.js'
-import {
     sortingClientItems
 } from './sortingClients.js'
 
@@ -31,6 +29,7 @@ const createApp = async () => {
     const headers = getHeaders();
     const tableBody = document.querySelector('.main__block');
     tableBody.id = 'table-body';
+    tableBody.innerHTML = ''
     tableBody.append(createPreloader());
 
 
@@ -41,16 +40,29 @@ const createApp = async () => {
 
 
     const preloader = document.querySelector('.preloader');
-
-    tableFilter();
-
+    const inputFilter = document.getElementById('header__filter');
 
     try {
         const clients = await getClients();
 
         for (const client of clients) {
-            document.querySelector('.main__block').append(getNewRow(client).tr)
+            document.querySelector('.main__block').append(getNewRow(client).tr);
         }
+
+        inputFilter.addEventListener('keyup', async () => {
+            const filteredClients = await fetchSearchClients(inputFilter.value.trim());
+            tableBody.innerHTML = '';
+
+            filteredClients.forEach(filteredClient => {
+                if (inputFilter.value) {
+                    document.querySelector('.main__block').append(getNewRow(filteredClient).tr);
+                } else {
+                    for (const client of clients) {
+                        document.querySelector('.main__block').append(getNewRow(client).tr);
+                    }
+                }
+            })
+        })
     } catch (error) {
         console.log(error);
     } finally {

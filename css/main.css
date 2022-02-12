@@ -97,6 +97,7 @@
   height: 300px;
   margin-bottom: 40px;
   background-color: var(--main-color);
+  overflow-y: auto;
 }
 
 .main__add-client-btn {
@@ -149,7 +150,7 @@
 .table__scroll {
   position: relative;
   display: inline-block; 
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 .search__items {

@@ -64,5 +64,17 @@ export const sendClientData = async (client, method, id = null) => {
   } catch (error) {
     console.log(error);
   }
+};
 
-}
+// Ищем клиентов
+export const fetchSearchClients = async (search) => {
+  try {
+    await delay(300); // установка задержки
+    const fetchUrl = `http://localhost:3000/api/clients/?search=`+`${search}`;
+    const response = await fetch(fetchUrl);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
