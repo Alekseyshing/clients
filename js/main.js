@@ -22,11 +22,13 @@ import {
     validateClientContact
 } from "./validateContact.js";
 import {
-    sortingClientItems
-} from './sortingClients.js'
+    sortTable
+} from "./sortingClients.js"
+
 
 const createApp = async () => {
     const headers = getHeaders();
+    const table = document.querySelector('.table_sort');
     const tableBody = document.querySelector('.main__block');
     tableBody.id = 'table-body';
     tableBody.innerHTML = ''
@@ -68,8 +70,6 @@ const createApp = async () => {
     } finally {
         preloader.remove();
     }
-
-    sortingClientItems();
 
     //Новый клиент
     const addButton = document.querySelector('.main__add-client-btn');
@@ -157,6 +157,5 @@ const createApp = async () => {
 
 }
 
-
-
 createApp();
+document.addEventListener('DOMContentLoaded', sortTable); 

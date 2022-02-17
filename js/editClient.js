@@ -3,6 +3,12 @@ import { createContactItem } from './createContact.js';
 import { createModal } from './createModal.js';
 import { createModalDelete } from './createModalDel.js';
 import { getNewRow } from './getNewRow.js';
+import {
+    validateClientForm
+} from './validateForm.js'
+import {
+    validateClientContact
+} from "./validateContact.js";
 
 export const editClientsItem = (data) => {
     const editModal = document.createElement('div');
@@ -88,6 +94,9 @@ export const editClientsItem = (data) => {
 
     createForm.popupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        if (!validateClientForm()) {
+            return
+        }
 
         const contactTypes = document.querySelectorAll('.contact__name');
         const contactValues = document.querySelectorAll('.contact__input');
@@ -95,6 +104,9 @@ export const editClientsItem = (data) => {
         let client = {};
 
         for (let i = 0; i < contactTypes.length; i++) {
+            if (!validateClientContact(contactTypes[i], contactValues[i])) {
+                return;
+            }
             contacts.push({
                 type: contactTypes[i].innerHTML,
                 value: contactValues[i].value

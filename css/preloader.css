@@ -4,10 +4,10 @@
   align-items: center;
   justify-content: center;
   z-index: 100;
-  top: 0;
-  left: 0;
-  height: 300px;
-  width: 100%;
+  top: 132px;
+  left: 474px;
+  height: 36px;
+  width: 36px;
   background-color: var(--color-white);
   animation: spin 1s linear infinite;
 }

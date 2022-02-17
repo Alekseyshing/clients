@@ -1,55 +1,83 @@
-export const sortingClientItems = () => {
-  const table = document.querySelector('.table_sort');
-  let colIndex = -1;
+import {
+  getHeaders
+} from './getHeaders.js'
 
-  const sortTable = function (index, type, isSorted) {
-    const tbody = document.querySelector('#table-body');
+export const sortTable = () => {
 
-    const compare = function (rowA, rowB) {
-      const rowDataA = rowA.cells[index].innerHTML;
-      const rowDataB = rowB.cells[index].innerHTML;
+  const headTh = getHeaders();
+  const sortingTable = document.querySelector('.table_sort');
+  const sortHeaders = headTh.sortingHeaders;  
+  const sortingBody = sortingTable.querySelector('tbody');
 
-      switch (type) {
-        case 'integer':
-          return rowDataA - rowDataB;
-          break;
-        case 'date':
-          const dateA = rowDataA.split('.').reverse().join('-');
-          const dateB = rowDataB.split('.').reverse().join('-');
-          return new Date(dateA).getTime() - new Date(dateB).getTime();
-          break
+  const directions = sortHeaders.map(() => '');
+
+  const transform = (type, content) => {
+    switch (type) {
+      case 'id':
+        return parseFloat(content);
+      case 'create':
+      case 'update':
+        return content.split('.').reverse().join('-');
         case 'text':
-          if(rowDataA < rowDataB) return -1;
-          if(rowDataA > rowDataB) return 1;
-          return 0
-          break
-      }
+        default:
+          return content
     }
-
-    let rows = [].slice.call(tbody.rows);
-
-    rows.sort(compare);
-
-    if(isSorted) rows.reverse();
-
-    for (let i = 0; i < rows.length; i++) {
-      tbody.append(rows[i])
-    }
-
-    table.append(tbody);
   }
 
-  table.addEventListener('click', (e) => {
-    let elem = e.target;
-    if (elem.nodeName !== 'TH') return;
+  const sortColumn = (index) => {
+    const type = sortHeaders[index].getAttribute('data-type');
+    const rows = sortingBody.querySelectorAll('tr');
+    const direction = directions[index] || 'sortUp';
+    const multiply = direction === 'sortUp' ? 1 : -1;
+    const newRows = Array.from(rows);
+
+    newRows.sort((row1, row2) => {
+      const cellA = row1.querySelectorAll('td')[index].textContent;
+      const cellB = row2.querySelectorAll('td')[index].textContent;
+
+      const a = transform(type, cellA);
+      const b = transform(type, cellB);
+
+      switch (true) {
+        case a > b: 
+              return 1 * multiply;
+        case a < b:
+          return -1 * multiply;
+        case a === b:
+          return 0
+      
+        default:
+          break;
+      }
+
+    });
 
 
-    const index = elem.cellIndex;
 
-    const type = elem.getAttribute('data-type');
+    directions[index] = direction === 'sortUp' ? 'sortDown' : 'sortUp'; 
 
-    sortTable(index, type, colIndex === index);
-    colIndex = (colIndex === index) ? -1 : index;
-  })
+    newRows.forEach(newRow => {
+      sortingBody.append(newRow);
+
+      [].forEach.call(rows, (row) => {
+        // sortingBody.remove(row);
+      });
+    })
+  };
+
+
+
+  [].forEach.call(sortHeaders, (header, index) => {
+    header.addEventListener('click', () => {
+      if (header.classList.contains('main__th--sort-down')) {
+        header.classList.remove('main__th--sort-down');
+        header.classList.add('main__th--sort-up');
+      } else {
+        header.classList.remove('main__th--sort-up');
+        header.classList.add('main__th--sort-down');
+      }
+      sortColumn(index);
+    });
+  });
+
 }
-

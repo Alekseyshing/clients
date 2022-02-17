@@ -1,12 +1,12 @@
 .header {
   margin-bottom: 40px;
+  background-color: var(--main-color);
+  box-shadow: 0 3px 5px 0px rgba(176, 190, 196, 0.3);
 }
 
 .header__container {
   padding: 20px 0 20px 29px;
   max-height: 90px;
-  background-color: var(--main-color);
-  box-shadow: 0 3px 5px 0px rgba(176, 190, 196, 0.322);
 }
 
 .header__logo{

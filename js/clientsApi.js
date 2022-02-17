@@ -41,7 +41,7 @@ export const deleteClient = async (id) => {
   const response = await fetch(`${URI}/${id}`, {
     method: "DELETE",
   }).then((response) => {
-    if (response.status === 200) {
+    if (response.ok) {
       console.log(response);
     }
   }).catch(() => {

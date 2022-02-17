@@ -77,30 +77,30 @@ export function createModal() {
   popupHeader.classList.add('popup__title');
   popupHeader.innerHTML = modalWindowStructure.headTitle().title;
   labelSurname.classList.add('popup__label', 'popup__label--placeholder');
-  labelSurname.setAttribute('for', 'surname');
+  labelSurname.setAttribute('for', 'floatingSurname');
   labelSurname.innerHTML = 'Фамилия*';
   labelName.classList.add('popup__label', 'popup__label--placeholder');
-  labelName.setAttribute('for', 'name');
+  labelName.setAttribute('for', 'floatingName');
   labelName.innerHTML = 'Имя*';
   labelMidname.classList.add('popup__label', 'popup__label--placeholder');
-  labelMidname.setAttribute('for', 'mid-name');
+  labelMidname.setAttribute('for', 'floatingLastName');
   labelMidname.innerHTML = 'Отчество';
   savePopupSpinner.innerHTML =  svgSaveSpinner;
 
   inputSurname.classList.add('popup__input', 'popup__input-surname');
   inputSurname.id = 'floatingSurname';
-  inputSurname.name = 'surname';
+  inputSurname.name = 'floatingSurname';
   inputSurname.type = 'text';
 
   inputName.classList.add('popup__input', 'popup__input-name');
   inputName.id = 'floatingName';
-  inputName.name = 'name';
+  inputName.name = 'floatingName';
   inputName.type = 'text';
 
 
   inputMidname.classList.add('popup__input', 'popup__input-middlename');
   inputMidname.id = 'floatingLastName';
-  inputMidname.name = 'mid-name';
+  inputMidname.name = 'floatingLastName';
   inputMidname.type = 'text';
 
   contactsBlock.classList.add('modal__contact');
