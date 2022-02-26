@@ -52,16 +52,15 @@ export const sortTable = () => {
 
     });
 
-
+    [].forEach.call(rows, (row) => {
+      // sortingBody.remove(row);
+      sortingBody.innerHTML = '';
+    });
 
     directions[index] = direction === 'sortUp' ? 'sortDown' : 'sortUp'; 
 
     newRows.forEach(newRow => {
       sortingBody.append(newRow);
-
-      [].forEach.call(rows, (row) => {
-        // sortingBody.remove(row);
-      });
     })
   };
 

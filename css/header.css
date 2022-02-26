@@ -28,3 +28,23 @@
   font-size: 14px;
   line-height: 19px;
 }
+
+@media (max-width: 760px){
+  .header__input {
+    display: none;
+  }
+
+  .header__logo {
+    margin-right: 0;
+    display: block;
+    margin: auto;
+    text-align: center;
+  }
+}
+
+@media (max-width: 520px){
+  .header__logo {
+    width: 24px;
+    height: 24px;
+  }
+}

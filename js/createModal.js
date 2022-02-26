@@ -1,5 +1,15 @@
 import { createContactItem } from "./createContact.js";
 import { svgSaveSpinner } from "./svg.js";
+import { sendClientData } from "./clientsApi.js";
+import {
+  validateClientForm
+} from './validateForm.js';
+import {
+  validateClientContact
+} from "./validateContact.js";
+import {
+  getNewRow
+} from "./getNewRow.js";
 
 
 
@@ -7,7 +17,7 @@ import { svgSaveSpinner } from "./svg.js";
 export function createModal() {
   // Объект структуры модального окна  
   const modalWindowStructure = {
-    type: 'new', // Может принимать значения new, change
+    type: '', // Может принимать значения new, change
 
     headTitle: function (title, button) {
       switch (this.type) {
@@ -44,7 +54,7 @@ export function createModal() {
   const contactsBlock = document.createElement('div');
   const popupAddContact = document.createElement('button');
   const popupAddContactSpan = document.createElement('span');
-  const popupAddContactImg = document.createElement('img');
+  // const popupAddContactImg = document.createElement('img');
   const saveBtn = document.createElement('button');
   const resetBtn = document.createElement('button');
 
@@ -85,7 +95,7 @@ export function createModal() {
   labelMidname.classList.add('popup__label', 'popup__label--placeholder');
   labelMidname.setAttribute('for', 'floatingLastName');
   labelMidname.innerHTML = 'Отчество';
-  savePopupSpinner.innerHTML =  svgSaveSpinner;
+  savePopupSpinner.innerHTML = svgSaveSpinner;
 
   inputSurname.classList.add('popup__input', 'popup__input-surname');
   inputSurname.id = 'floatingSurname';
@@ -110,8 +120,6 @@ export function createModal() {
   popupAddContact.id = 'add-new';
   popupAddContact.innerHTML = 'Добавить контакт';
   popupAddContactSpan.classList.add('popup__btn-img');
-  popupAddContactImg.src = './img/add_circle_outline.svg';
-  popupAddContactImg.alt = 'добавить контакт';
   saveBtn.type = 'submit';
   saveBtn.classList.add('popup__btn-save');
   saveBtn.id = 'submit';
@@ -129,10 +137,9 @@ export function createModal() {
   popupForm.append(popupHeader, popupFormMain, contactsBlock, errorBlock, saveBtn, resetBtn);
   popupFormMain.append(labelSurname, inputSurname, labelName, inputName, labelMidname,
     inputMidname);
-  popupAddContactSpan.append(popupAddContactImg);
   popupAddContact.append(popupAddContactSpan);
 
-  
+
   const refreshLabels = () => {
     labelSurname.classList.remove('popup__label--placeholder');
     labelSurname.classList.add('popup__label--label');
@@ -158,27 +165,27 @@ export function createModal() {
   }
 
   const inputsListener = () => {
-            
+
     const inputs = document.querySelectorAll('.popup__input');
     const labels = document.querySelectorAll('.popup__label');
     inputs.forEach((input) => {
-        input.onfocus = () => {
-            labels.forEach((label) => {
-                if (label.getAttribute('for') === input.getAttribute('name') || input.value != 0) {
-                    label.classList.remove('popup__label--placeholder');
-                    label.classList.add('popup__label--label');
-                }
-  
-            })
-        }
-        input.onblur = () => {
-            labels.forEach((label) => {
-                if (label.getAttribute('for') === input.getAttribute('name') && input.value < 1) {
-                    label.classList.remove('popup__label--label');
-                    label.classList.add('popup__label--placeholder');
-                }
-            })
-        }
+      input.onfocus = () => {
+        labels.forEach((label) => {
+          if (label.getAttribute('for') === input.getAttribute('name') || input.value != 0) {
+            label.classList.remove('popup__label--placeholder');
+            label.classList.add('popup__label--label');
+          }
+
+        })
+      }
+      input.onblur = () => {
+        labels.forEach((label) => {
+          if (label.getAttribute('for') === input.getAttribute('name') && input.value < 1) {
+            label.classList.remove('popup__label--label');
+            label.classList.add('popup__label--placeholder');
+          }
+        })
+      }
     })
   }
 
@@ -193,8 +200,8 @@ export function createModal() {
       contactsBlock.style.backgroundColor = 'var(--athenths-grey)';
       contactsBlock.style = 'padding: 25px 0';
     } else {
-      contactsBlock.prepend(contactItem.contact)
-      popupAddContact.classList.remove('popup__btn-contact--active')
+      contactsBlock.prepend(contactItem.contact);
+      popupAddContact.classList.remove('popup__btn-contact--active');
     }
   })
 
@@ -208,6 +215,62 @@ export function createModal() {
     if (event.target.classList.contains('popup__close') ||
       event.target.classList.contains('popup__body')) {
       popup.remove();
+    }
+  });
+
+
+  popupForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!validateClientForm()) {
+      return
+    }
+
+    const typesOfContacts = document.querySelectorAll('.contact__name');
+    const typesOfValues = document.querySelectorAll('.contact__input');
+
+    let contacts = [];
+    let newClient = {};
+
+    for (let i = 0; i < typesOfContacts.length; i++) {
+      if (!validateClientContact(typesOfContacts[i], typesOfValues[i])) {
+        return;
+      }
+      contacts.push({
+        type: typesOfContacts[i].innerHTML,
+        value: typesOfValues[i].value
+      })
+    }
+
+    newClient.surname = inputSurname.value;
+    newClient.name = inputName.value;
+    newClient.lastName = inputMidname.value;
+    newClient.contacts = contacts;
+
+    const spinner = document.querySelector('.popup__spinner');
+
+
+    if (modalWindowStructure.type === 'new') {
+      try {
+        spinner.style.display = 'block';
+        const newClients = await sendClientData(newClient);
+        setTimeout(() => {
+          document.querySelector('.main__block').append(getNewRow(newClients).tr);
+          popup.remove();
+        }, 300)
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setTimeout(() => spinner.style.display = 'none', 300)
+      }
+    }
+  })
+
+  // Нажатие на Esc
+  document.addEventListener('keydown', function (event) {
+    if (event.code === "Escape") {
+      popup.remove();
+      refreshInputs();
     }
   });
 

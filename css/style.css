@@ -76,6 +76,7 @@ h1, h2, h3, p, ul, ol {
   --burant-sienna: #e97451;
   --butterfly-bush: #624E9a;
   --electric-violet: #8052ff;
+  --Melrose: #b89eff;
 }
 
 .visually-hidden {
@@ -126,4 +127,23 @@ h1, h2, h3, p, ul, ol {
   transform: translateX(-50%);
   clip-path: polygon(100% 0, 0 0, 51% 100%);
   background-color: var(--text-color);
+}
+
+@media (max-width: 980px){
+  .container {
+    max-width: 768px;   
+    /* background-color: var(--main-color); */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;  
+  }
+}
+
+@media (max-width:760px){
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    padding-left: 10px;  
+  }
 }

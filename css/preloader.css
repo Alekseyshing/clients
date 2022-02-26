@@ -1,11 +1,11 @@
 .preloader {
-  position: absolute;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
   top: 132px;
-  left: 474px;
+  left: 50%;
   height: 36px;
   width: 36px;
   background-color: var(--color-white);
@@ -29,4 +29,10 @@
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform:  rotate(360deg); }
+}
+
+@media (max-width: 520px) {
+  .preloader {
+    left: 132px;
+  }
 }

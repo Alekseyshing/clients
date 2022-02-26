@@ -1,4 +1,4 @@
-import { sendClientData } from './clientsApi.js';
+import { patchClientData } from './clientsApi.js';
 import { createContactItem } from './createContact.js';
 import { createModal } from './createModal.js';
 import { createModalDelete } from './createModalDel.js';
@@ -23,8 +23,10 @@ export const editClientsItem = (data) => {
     editModalContent.classList.add('popup__content', 'site-modal__content', 'modal-active');
 
     titleId.textContent = 'ID: ' + data.id.substring(0, 3) + data.id.substring(8, 11);
-    createForm.popupHeader.textContent = 'Изменить данные';
-    createForm.resetBtn.textContent = 'Удалить клиента';
+    createForm.modalWindowStructure.type = 'change';
+    createForm.popupHeader.textContent = createForm.modalWindowStructure.headTitle().title;
+    createForm.resetBtn.textContent = createForm.modalWindowStructure.headTitle().button;
+ 
 
     createForm.resetBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -45,7 +47,7 @@ export const editClientsItem = (data) => {
 
                 } catch (error) {
                     console.log(error);
-                }finally {
+                } finally {
                     setTimeout(() => deleteModal.deleteSpinner.style.display = 'none', 300)
                 }
             });
@@ -116,22 +118,24 @@ export const editClientsItem = (data) => {
         client.name = createForm.inputName.value;
         client.surname = createForm.inputSurname.value;
         client.lastName = createForm.inputMidname.value;
-        client.contacts = contacts;    
+        client.contacts = contacts;
 
         const spinner = document.querySelector('.popup__spinner');
 
-        try {
-            spinner.style.display = 'block';
-            const editedData = await sendClientData(client, 'PATCH', data.id);
-            setTimeout(() => {
-                document.querySelector('.main__block').replaceChild(getNewRow(editedData).tr, document.getElementById(editedData.id));
-                editModal.remove();
-            }, 300)
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setTimeout(() => spinner.style.display = 'block', 300)
-        }
+        if (createForm.modalWindowStructure.type === 'change') {
+            try {
+                spinner.style.display = 'block';
+                const editedData = await patchClientData(client, data.id);
+                setTimeout(() => {
+                    document.querySelector('.main__block').replaceChild(getNewRow(editedData).tr, document.getElementById(editedData.id));
+                    editModal.remove();
+                }, 300)
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setTimeout(() => spinner.style.display = 'block', 300)
+            }
+        } else return
     });
 
     createForm.popupHeader.append(titleId);

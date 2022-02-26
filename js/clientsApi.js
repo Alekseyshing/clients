@@ -42,7 +42,7 @@ export const deleteClient = async (id) => {
     method: "DELETE",
   }).then((response) => {
     if (response.ok) {
-      console.log(response);
+      // console.log(response);
     }
   }).catch(() => {
     throw new Error(`Ошибка по адресу: ${URI}, статус ошибки: ${response.status}`)
@@ -51,10 +51,25 @@ export const deleteClient = async (id) => {
   return response;
 };
 
-export const sendClientData = async (client, method, id = null) => {
+export const sendClientData = async (client) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/clients/${method === 'POST' ? '' : id}`, {
-      method,
+    const response = await fetch(`${URI}`, {
+      method: "POST",
+      body: JSON.stringify(client)
+    });
+
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const patchClientData = async (client, id = null) => {
+  try {
+    const response = await fetch(`http://localhost:3000/api/clients/${id}`, {
+      method: "PATCH",
       body: JSON.stringify(client)
     });
 
@@ -69,7 +84,6 @@ export const sendClientData = async (client, method, id = null) => {
 // Ищем клиентов
 export const fetchSearchClients = async (search) => {
   try {
-    await delay(300); // установка задержки
     const fetchUrl = `http://localhost:3000/api/clients/?search=`+`${search}`;
     const response = await fetch(fetchUrl);
     const data = await response.json();

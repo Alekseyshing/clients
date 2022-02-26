@@ -176,3 +176,22 @@
   margin-right: 7px;
 }
 
+.contact__show {
+  display: inline-block;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  color: var(--text-color);
+  background-color: var(--main-color);
+  border: 1px solid var(--firm-color);
+  border-radius: 50%;
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 11px;
+}
+
+.contact__hidden {
+  display: none;
+}
+
